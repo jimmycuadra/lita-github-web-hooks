@@ -11,7 +11,7 @@ module Lita
           "GithubWebHooks"
         end
 
-        http.post "/github-webhooks", :receive_hook
+        http.post "/github-web-hooks", :receive_hook
 
         def receive_hook(request, response)
           if valid?(request)
