@@ -1,1 +1,1 @@
-require "lita/handlers/github_web_hooks"
+require_relative "lita/handlers/github_web_hooks"
