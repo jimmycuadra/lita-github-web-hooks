@@ -1,6 +1,6 @@
 # lita-github-web-hooks
 
-**lita-github-web-hooks** announces various activity on GitHub using [Web Hooks](https://developer.github.com/webhooks/).
+**lita-github-web-hooks** integrates GitHub [Web Hooks](https://developer.github.com/webhooks/) with [Lita](http://www.lita.io/). It allows Lita to announce various GitHub activity in the chat.
 
 ## Installation
 
