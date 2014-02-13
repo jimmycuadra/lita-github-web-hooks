@@ -2,6 +2,8 @@ en:
   lita:
     handlers:
       github_web_hooks:
+        ping: "[GitHub] Ping: %{zen}"
+        push: "[GitHub] %{name} pushed to %{ref} at %{repo}. Compare: %{compare_url}"
         watch: >
           [GitHub] User %{user} starred repository %{repo}, bringing the total stargazers to
           %{stargazers_count}.
