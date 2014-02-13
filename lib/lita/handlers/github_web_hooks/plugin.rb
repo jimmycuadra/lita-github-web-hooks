@@ -21,9 +21,6 @@ module Lita
           end
 
           response.status = 202
-        rescue => ex
-          Lita.logger.fatal(ex.message)
-          Lita.logger.fatal(ex.backtrace)
         end
 
         private
