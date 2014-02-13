@@ -2,6 +2,15 @@ module Lita
   module Handlers
     module GitHubWebHooks
       class Plugin < Handler
+        def self.default_config(config)
+          config.room_ids = []
+        end
+
+        # Overrides the handler config key, from plugin to github_web_hooks.
+        def self.name
+          "GithubWebHooks"
+        end
+
         http.post "/github-webhooks", :receive_hook
 
         def receive_hook(request, response)
@@ -12,16 +21,19 @@ module Lita
           end
 
           response.status = 202
+        rescue => ex
+          Lita.logger.fatal(ex.message)
+          Lita.logger.fatal(ex.backtrace)
         end
 
         private
 
         def event_class_from_request(request)
-          GitHubWebHooks.supported_events[request.env["HTTP_X_GITHUB_EVENT"]]
+          GitHubWebHooks.hooks[request.env["HTTP_X_GITHUB_EVENT"]]
         end
 
         def extract_payload(request)
-          MultiJson.load(response.body)
+          MultiJson.load(request.body)
         end
 
         def github_cidrs

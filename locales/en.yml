@@ -1,0 +1,7 @@
+en:
+  lita:
+    handlers:
+      github_web_hooks:
+        watch: >
+          [GitHub] User %{user} starred repository %{repo}, bringing the total stargazers to
+          %{stargazers_count}.
