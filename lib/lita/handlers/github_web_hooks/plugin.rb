@@ -58,8 +58,8 @@ module Lita
         def valid_event_type?(request)
           validity = !event_class_from_request(request).nil?
           Lita.logger.warn(
-            "GitHub web hook received with invalid event: #{event_class_from_request(request)}"
-          )
+            "GitHub web hook received with invalid event: #{event_type_from_request(request)}"
+          ) unless validity
           validity
         end
 
