@@ -18,9 +18,18 @@ module Lita::Handlers
         raise "Must be implemented in child hook class."
       end
 
+      def rooms
+        ids = Array(Lita.config.handlers.github_web_hooks.room_ids)
+        ids.map { |id| Lita::Source.new(room: id) }
+      end
+
       def targets
-        target_ids = Array(Lita.config.handlers.github_web_hooks.room_ids)
-        target_ids.map { |target_id| Lita::Source.new(room: target_id) }
+        rooms + users
+      end
+
+      def users
+        ids = Array(Lita.config.handlers.github_web_hooks.user_ids)
+        ids.map { |id| Lita::Source.new(user: id) }
       end
     end
   end

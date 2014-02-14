@@ -4,6 +4,7 @@ module Lita
       class Plugin < Handler
         def self.default_config(config)
           config.room_ids = []
+          config.user_ids = []
         end
 
         # Overrides the handler config key, from plugin to github_web_hooks.
