@@ -34,7 +34,14 @@ module Lita
         end
 
         def extract_payload(request)
-          MultiJson.load(request.body)
+          case (media_type = request.media_type)
+          when "application/x-www-form-urlencoded"
+            MultiJson.load(request["payload"])
+          when "application/json"
+            MultiJson.load(request.body)
+          else
+            raise "GitHub web hooks: Invalid HTTP Content-Type header: #{media_type}"
+          end
         end
 
         def github_cidrs
@@ -44,7 +51,7 @@ module Lita
         end
 
         def valid?(request)
-          valid_content_type?(request) && valid_event_type?(request) && valid_ip?(request)
+          valid_event_type?(request) && valid_ip?(request)
         end
 
         def valid_content_type?(request)

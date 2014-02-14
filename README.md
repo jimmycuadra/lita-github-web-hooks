@@ -33,7 +33,6 @@ end
 1. Specify which rooms you want GitHub activity announced in via the configuration attribute.
 1. Use GitHub's API or a repository's settings page to create a new hook for the events you're interested in.
 1. Set the "Payoad URL" to http://example.com/github-web-hooks, where example.com is the hostname where your Lita instance is running.
-1. **Important**: Set the "Payload version" to "application/vnd.github.v3+json". The "form" media type is not supported and will prevent messages from appearing via Lita.
 
 ## License
 
