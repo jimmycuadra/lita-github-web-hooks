@@ -26,7 +26,11 @@ module Lita
         private
 
         def event_class_from_request(request)
-          GitHubWebHooks.hooks[request.env["HTTP_X_GITHUB_EVENT"]]
+          GitHubWebHooks.hooks[event_type_from_request(request)]
+        end
+
+        def event_type_from_request(request)
+          request.env["HTTP_X_GITHUB_EVENT"]
         end
 
         def extract_payload(request)
@@ -44,19 +48,30 @@ module Lita
         end
 
         def valid_content_type?(request)
-          request.media_type == "application/json"
+          validity = request.media_type == "application/json"
+          Lita.logger.warn(
+            "GitHub web hook received with invalid media type: #{request.media_type}"
+          ) unless validity
+          validity
         end
 
         def valid_event_type?(request)
-          !event_class_from_request(request).nil?
+          validity = !event_class_from_request(request).nil?
+          Lita.logger.warn(
+            "GitHub web hook received with invalid event: #{event_class_from_request(request)}"
+          )
+          validity
         end
 
         def valid_ip?(request)
           ip = request.ip
 
-          github_cidrs.any? do |cidr|
+          validity = github_cidrs.any? do |cidr|
             NetAddr::CIDR.create(cidr).contains?(ip)
           end
+
+          Lita.logger.warn("GitHub web hook received from invalid IP: #{ip}") unless validity
+          validity
         end
       end
 
