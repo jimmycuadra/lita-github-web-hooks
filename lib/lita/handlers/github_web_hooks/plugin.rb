@@ -52,7 +52,7 @@ module Lita
         end
 
         def valid_ip?(request)
-          ip = request.env["REMOTE_ADDR"]
+          ip = request.ip
 
           github_cidrs.any? do |cidr|
             NetAddr::CIDR.create(cidr).contains?(ip)
