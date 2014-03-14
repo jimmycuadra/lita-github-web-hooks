@@ -1,5 +1,3 @@
-require "i18n"
-require "lita"
 require "netaddr"
 
 module Lita::Handlers
@@ -15,11 +13,6 @@ module Lita::Handlers
     end
   end
 end
-
-I18n.load_path += Dir[
-  File.expand_path(File.join("..", "..", "..", "..", "locales", "*.yml"), __FILE__)
-]
-I18n.reload!
 
 require_relative "github_web_hooks/hook"
 
