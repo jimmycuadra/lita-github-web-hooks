@@ -16,8 +16,8 @@ end
 
 require_relative "github_web_hooks/hook"
 
-Dir[File.dirname(__FILE__) + ("/github_web_hooks/hooks/*")].each do |file|
-  require_relative "github_web_hooks/hooks/#{File.basename(file, ".rb")}"
-end
+require_relative "github_web_hooks/hooks/ping"
+require_relative "github_web_hooks/hooks/push"
+require_relative "github_web_hooks/hooks/watch"
 
 require_relative "github_web_hooks/plugin"

@@ -30,6 +30,8 @@ end
 
 ## Usage
 
+**IMPORTANT: Only the ping, push, and watch hooks are implemented so far. The rest of the hooks will be coming when GitHub documents their payloads.**
+
 1. Specify which rooms and users you want GitHub activity announced to via the configuration attributes.
 1. Use GitHub's API or a repository's settings page to create a new hook for the events you're interested in. Set the "Payoad URL" to http://example.com/github-web-hooks, where example.com is the hostname where your Lita instance is running.
 
